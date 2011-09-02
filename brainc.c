@@ -34,27 +34,31 @@ int main(int argc, char **argv)
 {
   /* Ask user for the number of digits to enter 1 - 3 */
 
+
+
   /* Main as a big switch */
-    switch(stripdash(argv[FIRST_ARG])[0]){
-    case 'a':                              /* addition */
-      printf("got here\n");
+  if(argv[FIRST_ARG]){
+  switch(stripdash(argv[FIRST_ARG])[0]){
+  case 'a':                                /* addition */                  
+      printf("got here 1\n");
       break;
-    case 's':                              /* subtraction */
-      printf("got here\n");
+  case 's':                                /* subtraction */
+      printf("got here 2\n");
       break;
-    case 'd':                              /* division */
-      printf("got here\n");
+  case 'd':                                /* division */
+      printf("got here 3\n");
       break;
-    case 'm':                              /* multiplication */
-      printf("got here\n");
+  case 'm':                                /* multiplication */
+      printf("got here 4\n");
       break;
-    case 'e':                              /* everything */
-      printf("got here\n");
+  case 'e':                                /* everything */
+      printf("got here 5\n");
       break;
-    case 'h':
+  default:                                 /* help */
+  case 'h':                                
       help();
-      break;
     }
+
   return(EXIT_SUCCESS);
 }
 void help()
