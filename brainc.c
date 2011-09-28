@@ -22,42 +22,44 @@
 *                                                                         *
 ***************************************************************************/
 
-#include <stdio.h>                                  /* for io and stuff like that */
+#include <stdio.h>
 #include <ctype.h>                                  /* for isdigit and isalnum */
 #include <stdlib.h>                                 /* for rand() */
 #include <time.h>                                   /* for seeding rand() */
 #include <unistd.h>                                 /* for sleep() */
 #define FIRST_ARG 1                                 /* First commandline argument */
-extern char *stripdash(char *arg);
+extern char stripdash(char *arg);
 void help();
 int main(int argc, char **argv)
 {
   /* Ask user for the number of digits to enter 1 - 3 */
 
-
-
-  /* Main as a big switch */
+ 
+ /* Main as a big switch */
   if(argv[FIRST_ARG]){
-  switch(stripdash(argv[FIRST_ARG])[0]){
-  case 'a':                                /* addition */                  
-      printf("got here 1\n");
-      break;
-  case 's':                                /* subtraction */
-      printf("got here 2\n");
-      break;
-  case 'd':                                /* division */
-      printf("got here 3\n");
-      break;
-  case 'm':                                /* multiplication */
-      printf("got here 4\n");
-      break;
-  case 'e':                                /* everything */
-      printf("got here 5\n");
-      break;
-  default:                                 /* help */
-  case 'h':                                
-      help();
+    switch(stripdash(argv[FIRST_ARG])){
+      case 'a':                                /* addition */                  
+        printf("got here 1\n");
+        break;
+      case 's':                                /* subtraction */
+        printf("got here 2\n");
+        break;
+      case 'd':                                /* division */
+        printf("got here 3\n");
+        break;
+      case 'm':                                /* multiplication */
+        printf("got here 4\n");
+        break;
+      case 'e':                                /* everything */
+        printf("got here 5\n");
+        break;
+      default:                                 /* help */
+        help();
     }
+  }
+  else{
+    help();
+  }
 
   return(EXIT_SUCCESS);
 }
