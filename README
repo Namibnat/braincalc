@@ -1,0 +1,12 @@
+Braincalc
+By Vernon Swanepoel
+
+A simple game to test your ability to do some mental arithmatic
+
+I started working on it in C, while learning C (which I'm still busy with)
+but wanted it to work already as part of my daily habit of keeping my 
+pip fresh, so I wrote a quick version in python - brainc.py
+
+I'd like to finish the C version, and perhaps extend the python
+version a bit (such as with command line options)
+
