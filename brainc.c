@@ -37,7 +37,7 @@ int main(int argc, char **argv)
  
  /* Main as a big switch */
   if(argv[FIRST_ARG]){
-    switch(stripdash(argv[FIRST_ARG])){
+    switch(stripdash(argv[FIRST_ARG])s){
       case 'a':                                /* addition */                  
         printf("got here 1\n");
         break;
