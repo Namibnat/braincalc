@@ -3,10 +3,22 @@ By Vernon Swanepoel
 
 A simple game to test your ability to do some mental arithmatic
 
-I started working on it in C, while learning C (which I'm still busy with)
-but wanted it to work already as part of my daily habit of keeping my 
-pip fresh, so I wrote a quick version in python - brainc.py
+Based on the idea behind "Train Your Brain", a book by
+Dr. Kawashima, simple math is a great way to sharpen
+your brain a bit.  I'm not sure how right he is, but I
+thought it would be a fun c programming excercise to try
+to implement this in a console program.
 
-I'd like to finish the C version, and perhaps extend the python
-version a bit (such as with command line options)
+Developed on Debian GNU/Linux as a Linux console
+application
 
+To compile the program:
+cp into the directory and type 'make'
+
+to play the game:
+usr@computer:~$ ./brain
+
+Optionally:
+usr@computer:~$ ./brain h      # for help
+usr@computer:~$ ./brain 10     # for number of turns
+usr@computer:~$ ./brain 10 10  # for number of turns and max values
