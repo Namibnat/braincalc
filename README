@@ -22,3 +22,6 @@ Optionally:
 usr@computer:~$ ./brain h      # for help
 usr@computer:~$ ./brain 10     # for number of turns
 usr@computer:~$ ./brain 10 10  # for number of turns and max values
+
+There is no timer (yet), so you can run with time:
+usr@computer:~$ time ./brain h      # use bash to time your progress

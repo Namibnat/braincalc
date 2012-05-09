@@ -1,5 +1,5 @@
 CFLAGS= -g -Wall
-brain: brain.h
+brain: brain.h help.c
 
 .PHONY : clean
 clean:
