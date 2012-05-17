@@ -36,6 +36,7 @@ int main(int argc, char **argv)
 {
   int i, r, n1, n2;
   int rounds, maxnum;
+  int score = 0;
   rounds = (argv[1] && isdigit(argv[1][0])) ? atoi(argv[1]) : ROUNDS;
   maxnum = (argv[2] && isdigit(argv[2][0])) ? atoi(argv[2]) : MAXNUM;
   if(argv[1] && (argv[1][0] == 'h')){
@@ -49,25 +50,29 @@ int main(int argc, char **argv)
     n2 = rand() % maxnum;
     switch(r){
     case 0:
-      cal_add(n1, n2);
+      score += cal_add(n1, n2);
       break;
     case 1:
-      (n1 >= n2) ? cal_sub(n1, n2) : cal_sub(n2, n1);
+      score += (n1 >= n2) ? cal_sub(n1, n2) : cal_sub(n2, n1);
       break;
     case 2:
-      cal_mul(n1, n2);
+      score += cal_mul(n1, n2);
       break;
     case 3:
       while(n1 == 0 || n2 == 0){
 	n1 = rand() % MAXNUM;
 	n2 = rand() % MAXNUM;
       }
-      (n1 >= n2) ? cal_div(n1, n2) : cal_sub(n2, n1);
+      score += (n1 >= n2) ? cal_div(n1, n2) : cal_sub(n2, n1);
       break;
     default:
       printf("Something isn't working rights\n");
       return 0;
     }
+  }
+  printf("You got %d out of %d", score, rounds);
+  if((rounds - score) < 4){
+    printf("!");
   }
   printf("\n");
   return 0;
@@ -75,7 +80,8 @@ int main(int argc, char **argv)
 
 int cal_add(int num1, int num2)
 {
-  int answer, n, c, i, usrans;
+  int answer, n, c, i, usrans, score;
+  score = 0;
   answer = num1 + num2;
   printf("%d + %d = ", num1, num2);
   usrans = 0;
@@ -84,15 +90,13 @@ int cal_add(int num1, int num2)
     usrans = n * usrans + (c - '0');
     n *= 10;
   }
-  printf("\b ");
-  printf("\033[1;31;40m ");
-  (usrans == answer) ? printf("    right!\n") : printf("    wrong\n");
-  printf("\033[0;37;40m");
-  return 0;
+  (usrans == answer) ? (printf("    right!\n")) && score++ : (printf("    wrong\n"));
+  return score;
 }
 int cal_sub(int num1, int num2)
 {
-  int answer, n, c, i, usrans;
+  int answer, n, c, i, usrans, score;
+  score = 0;
   answer = num1 - num2;
   printf("%d - %d = ", num1, num2);
   usrans = 0;
@@ -101,15 +105,13 @@ int cal_sub(int num1, int num2)
     usrans = n * usrans + (c - '0');
     n *= 10;
   }
-  printf("\b ");
-  printf("\033[1;31;40m ");
-  (usrans == answer) ? printf("    right!\n") : printf("    wrong\n");
-  printf("\033[0;37;40m");
-  return 0;
+  (usrans == answer) ? (printf("    right!\n")) && score++ : printf("    wrong\n");
+  return score;
  }
 int cal_mul(int num1, int num2)
 {
-  int answer, n, c, i, usrans;
+  int answer, n, c, i, usrans, score;
+  score = 0;
   answer = num1 * num2;
   printf("%d x %d = ", num1, num2);
   n = 1;
@@ -118,16 +120,14 @@ int cal_mul(int num1, int num2)
     usrans = n * usrans + (c - '0');
     n *= 10;
   }
-  printf("\b ");
-  printf("\033[1;31;40m ");
-  (usrans == answer) ? printf("    right!\n") : printf("    wrong\n");
-  printf("\033[0;37;40m");
-  return 0;
+  (usrans == answer) ? (printf("    right!\n")) && score++ : printf("    wrong\n");
+  return score;
 }
 int cal_div(int num1, int num2)
 {
-  int answer, n, c, i, usrans;
+  int answer, n, c, i, usrans, score;
   int remainder, usrrem;
+  score = 0;
   answer = num1 / num2;
   remainder = num1 % num2;
   printf("%d / %d = ", num1, num2);
@@ -144,9 +144,6 @@ int cal_div(int num1, int num2)
       n *= 10;
     }
   }
-  printf("\b ");
-  printf("\033[1;31;40m ");
-  (usrans == answer && usrrem == remainder) ? printf("    right!\n") : printf("    wrong\n");
-  printf("\033[0;37;40m");
-  return 0;
+  (usrans == answer && usrrem == remainder) ? (printf("    right!\n")) && score++ : printf("    wrong\n");
+  return score;
 }
