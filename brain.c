@@ -34,6 +34,14 @@ int cal_div(int num1, int num2);
 extern void help();
 int main(int argc, char **argv)
 {
+  /* To add time */
+clock_t begin, end;
+double time_spent;
+begin = clock();
+
+
+
+
   int i, r, n1, n2;
   int rounds, maxnum;
   int score = 0;
@@ -70,7 +78,9 @@ int main(int argc, char **argv)
       return 0;
     }
   }
-  printf("You got %d out of %d", score, rounds);
+  end = clock();
+  time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+  printf("You got %d out of %d in %.2f seconds", score, rounds, time_spent);
   if((rounds - score) < 4){
     printf("!");
   }
