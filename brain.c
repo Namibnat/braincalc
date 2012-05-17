@@ -34,60 +34,70 @@ int cal_div(int num1, int num2);
 extern void help();
 int main(int argc, char **argv)
 {
-  /* To add time */
-clock_t begin, end;
-double time_spent;
-begin = clock();
-
-
-
-
+  double time_spent;  /* To add time */
+  time_t begin, end;  /* To add time */
   int i, r, n1, n2;
-  int rounds, maxnum;
+  int rounds, maxnum; /* rounds is how many iterations of the game there will be
+                         maxnum is the biggest values used in the sums */
   int score = 0;
+  /* initial settings for rounds & turns */
   rounds = (argv[1] && isdigit(argv[1][0])) ? atoi(argv[1]) : ROUNDS;
   maxnum = (argv[2] && isdigit(argv[2][0])) ? atoi(argv[2]) : MAXNUM;
+  /* start the timer */
+  begin = time(NULL);
+  /* return HOWTO instead of play */
   if(argv[1] && (argv[1][0] == 'h')){
     help();
     return 0;
   }
+  /* the main dispach switch */
   srand ( (unsigned)time ( NULL ) );
   for(i = 0; i < rounds; i++){
     r = rand() % 4;
     n1 = rand() % maxnum;
     n2 = rand() % maxnum;
     switch(r){
-    case 0:
+    case 0: /* addition */
       score += cal_add(n1, n2);
       break;
-    case 1:
+    case 1: /* subtraction - call function with biggest number first,
+                             so we don't need to have negatives in the answer */
       score += (n1 >= n2) ? cal_sub(n1, n2) : cal_sub(n2, n1);
       break;
-    case 2:
+    case 2: /* multiplication */
       score += cal_mul(n1, n2);
       break;
-    case 3:
+    case 3: /* division - we avoid 0 in the division, just to simplify things
+                          like subtraction, we also use the bigger val divided by the smaller */
       while(n1 == 0 || n2 == 0){
 	n1 = rand() % MAXNUM;
 	n2 = rand() % MAXNUM;
       }
       score += (n1 >= n2) ? cal_div(n1, n2) : cal_sub(n2, n1);
       break;
-    default:
+    default: /* catch imposible */
       printf("Something isn't working rights\n");
       return 0;
     }
   }
-  end = clock();
-  time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-  printf("You got %d out of %d in %.2f seconds", score, rounds, time_spent);
+  /* end timer */
+  end = time(NULL);
+  time_spent = difftime(end, begin);
+  /* Report */
+  printf("\n");
+  printf("You got %d out of %d in %.0f seconds", score, rounds, time_spent);
   if((rounds - score) < 4){
     printf("!");
   }
   printf("\n");
   return 0;
 }
-
+/* the next for functions do the main game play
+   score - returns 1 if the user gets right, zero for wrong
+   usrans - user answer
+   in division we also have a remainder,
+   rather than using decimals in the values
+*/
 int cal_add(int num1, int num2)
 {
   int answer, n, c, i, usrans, score;
