@@ -34,8 +34,9 @@ int cal_div(int num1, int num2);
 extern void help();
 int main(int argc, char **argv)
 {
-  double time_spent;  /* To add time */
-  time_t begin, end;  /* To add time */
+  double time_spent;               /* To add time */
+  int time_spent_m, time_spent_s;  /* To add time */
+  time_t begin, end;               /* To add time */
   int i, r, n1, n2;
   int rounds, maxnum; /* rounds is how many iterations of the game there will be
                          maxnum is the biggest values used in the sums */
@@ -83,13 +84,22 @@ int main(int argc, char **argv)
   /* end timer */
   end = time(NULL);
   time_spent = difftime(end, begin);
+  time_spent_m = (int)(time_spent)/60;
+  time_spent_s = (int)(time_spent)%60;
+
   /* Report */
   printf("\n");
-  printf("You got %d out of %d in %.0f seconds", score, rounds, time_spent);
+  printf("You got %d out of %d in %d ", score, rounds, time_spent_m);
+  printf("%s", (time_spent_m == 1)?"minute":"minutes");
+  printf(", %d ", time_spent_s);
+  printf("%s", (time_spent_s == 1)?"second":"seconds");
   if((rounds - score) < 4){
     printf("!");
   }
-  printf("\n");
+  else{
+    printf(".");
+  }
+  printf("\n\n");
   return 0;
 }
 /* the next for functions do the main game play
